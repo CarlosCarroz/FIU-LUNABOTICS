@@ -1,0 +1,187 @@
+#VRML_SIM R2023b utf8
+WorldInfo {
+  basicTimeStep 1
+  physics "Bullet"
+}
+
+Viewpoint {
+  orientation -0.577 0.577 0.577 2.1
+  position 0 6 4
+}
+
+TexturedBackground {}
+TexturedBackgroundLight {}
+
+DirectionalLight {
+  direction -0.5 0.1 -1
+  intensity 1
+  color 1 1 1
+}
+
+# ================= Terrain (Heightmap) =================
+Solid {
+  name "terrain"
+  translation 0 0 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.55 0.52 0.47
+        roughness 0.9
+        metalness 0
+      }
+      geometry ElevationGrid {
+        xDimension 68
+        zDimension 50
+        xSpacing 0.1
+        zSpacing 0.1
+        heightMap "lunafield_heightmap.png"
+        heightScale 0.3
+      }
+    }
+  ]
+  boundingObject Group {
+    children [
+      Box { size 6.8 5.0 0.3 }
+    ]
+  }
+  physics Physics {
+    density -1
+    coulombFriction 1.2
+    rollingFriction 0.0
+  }
+}
+
+# ================= Walls =================
+DEF WALL_NORTH Solid {
+  translation 0 2.55 0.25
+  children [
+    Shape {
+      geometry Box { size 6.8 0.1 0.5 }
+      appearance PBRAppearance { baseColor 0.7 0.7 0.7 }
+    }
+  ]
+}
+
+DEF WALL_SOUTH Solid {
+  translation 0 -2.55 0.25
+  children [
+    Shape {
+      geometry Box { size 6.8 0.1 0.5 }
+      appearance PBRAppearance { baseColor 0.7 0.7 0.7 }
+    }
+  ]
+}
+
+DEF WALL_EAST Solid {
+  translation 3.45 0 0.25
+  children [
+    Shape {
+      geometry Box { size 0.1 5.0 0.5 }
+      appearance PBRAppearance { baseColor 0.7 0.7 0.7 }
+    }
+  ]
+}
+
+DEF WALL_WEST Solid {
+  translation -3.45 0 0.25
+  children [
+    Shape {
+      geometry Box { size 0.1 5.0 0.5 }
+      appearance PBRAppearance { baseColor 0.7 0.7 0.7 }
+    }
+  ]
+}
+
+# ================= Start Zone =================
+Solid {
+  name "start_zone"
+  translation -2.9 -1.9 0.01
+  children [
+    Shape {
+      geometry Box { size 2.0 1.0 0.02 }
+      appearance PBRAppearance { baseColor 0.1 0.8 0.1 opacity 0.6 }
+    }
+  ]
+}
+
+# ================= Brim Pad =================
+Solid {
+  name "brim_pad"
+  translation 2.4 1.8 0.01
+  children [
+    Shape {
+      geometry Box { size 1.0 1.5 0.02 }
+      appearance PBRAppearance { baseColor 0.9 0.8 0.1 opacity 0.6 }
+    }
+  ]
+}
+
+# ================= Brim Poles =================
+Solid {
+  translation 2.9 2.55 0.6
+  children [
+    Shape {
+      geometry Cylinder { radius 0.03 height 1.2 }
+      appearance PBRAppearance { baseColor 0.9 0.1 0.1 }
+    }
+  ]
+}
+Solid {
+  translation 1.9 2.55 0.6
+  children [
+    Shape {
+      geometry Cylinder { radius 0.03 height 1.2 }
+      appearance PBRAppearance { baseColor 0.9 0.1 0.1 }
+    }
+  ]
+}
+Solid {
+  translation 2.9 1.05 0.6
+  children [
+    Shape {
+      geometry Cylinder { radius 0.03 height 1.2 }
+      appearance PBRAppearance { baseColor 0.9 0.1 0.1 }
+    }
+  ]
+}
+Solid {
+  translation 1.9 1.05 0.6
+  children [
+    Shape {
+      geometry Cylinder { radius 0.03 height 1.2 }
+      appearance PBRAppearance { baseColor 0.9 0.1 0.1 }
+    }
+  ]
+}
+
+# ================= Rocks =================
+Solid {
+  translation -0.8 1.2 0.15
+  children [
+    Shape {
+      geometry Sphere { radius 0.15 }
+      appearance PBRAppearance { baseColor 0.4 0.4 0.4 }
+    }
+  ]
+}
+
+Solid {
+  translation 1.1 -0.6 0.18
+  children [
+    Shape {
+      geometry Sphere { radius 0.18 }
+      appearance PBRAppearance { baseColor 0.45 0.45 0.45 }
+    }
+  ]
+}
+
+Solid {
+  translation -2.0 0.3 0.20
+  children [
+    Shape {
+      geometry Sphere { radius 0.20 }
+      appearance PBRAppearance { baseColor 0.35 0.35 0.35 }
+    }
+  ]
+}
+
